@@ -42,7 +42,11 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
         } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
             $pname_err = "Please enter a valid name.";
         } else{
-            $pName = $input_pname;
+            $query = "SELECT Pname FROM Podcast WHERE Pname = \"$input_pname\"";
+            $res = mysqli_query($link,$query);
+            if(mysqli_num_rows($res) == 1){
+                $pName = $input_pname;
+            }
         }
         
         
