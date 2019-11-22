@@ -6,7 +6,7 @@ function debug_to_console($data) {
 
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
+//header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
   require_once 'connectvars.php';
   $pName = "";
   $days = "";
@@ -22,7 +22,11 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
         } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
             $name_err = "Please enter a valid name.";
         } else{
-            $pName = $input_name;
+        	$query = "SELECT Pname FROM Podcast WHERE Pname = \"$input_name\"";
+        	$res = mysqli_query($link,$query);
+        	if(mysqli_num_rows($res) == 1){
+        		$pName = $input_name;
+        	}
         }
         
         
@@ -38,13 +42,12 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
         
         // Check input errors before inserting in database
         if(empty($name_err) && empty($days_err)){
-        	debug_to_console("here");
         // Prepare an insert statement
         $sql = "INSERT INTO Schedule (days, sch_id, pname) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "iss", $param_days, $param_id, $param_name);
+            mysqli_stmt_bind_param($stmt, "sis", $param_days, $param_id, $param_name);
             
             // Set parameters
             $param_days = $days;
