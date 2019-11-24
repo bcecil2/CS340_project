@@ -17,6 +17,13 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/update.php');
 			$input_id = (int)trim($_POST["gid"]);
 			$id = $input_id;
 
+			if($_POST["sel1"] != "--None--" && $_POST["sel2"] != "--None--"){
+				$input_guest_id = (int) (split("-", ($_POST["sel1"]))[1]);
+				$input_ep_name = trim($_POST["sel2"]);
+				$features = "INSERT INTO features (ep_title, Guest_id) VALUES (\"$input_ep_name\", $input_guest_id)";
+				mysqli_query($link, $features);
+			}
+
 			$sql = "UPDATE Guest SET Guest_name = \"$newName\" WHERE Guest.Guest_id = $id";
 			mysqli_query($link, $sql);
 		}

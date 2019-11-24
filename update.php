@@ -58,6 +58,51 @@
         <label for="id">Host id</label>
         <input type="name" class="form-control" id="hid" aria-describedby="emailHelp" placeholder="Enter Hosts ID" name="hid">
       </div>
+      <div class="row">
+        <label for="sel1">Who Hosts What?</label>
+          <div class="col">
+          <select class="form-control form-check-inline" id="sel1" name="sel1">
+            <option>--None--</option>
+          <?php  $sql = "SELECT * FROM Host";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
+                }
+                // Free result set
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+        </select>
+        </div> 
+        Hosts
+        <div class="col">
+            <select class="form-control form-check-inline" id="sel2" name="sel2">
+              <option>--None--</option>
+                      <?php  $sql = "SELECT * FROM Podcast";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['Pname'] . "</option>";
+                }
+                // Free result set
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+            </select>
+        </div>
+
+      </div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
 </div>
@@ -103,6 +148,49 @@
         <label for="pname">Guest ID</label>
         <input type="name" class="form-control" id="gid" aria-describedby="emailHelp" placeholder="Enter Guest ID" name="gid">
       </div>
+      <div class="row">
+        <label for="sel1">Who's Appeared Where?</label>
+          <div class="col">
+          <select class="form-control form-check-inline" id="sel1" name="sel1">
+            <option>--None--</option>
+          <?php  $sql = "SELECT * FROM Guest";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['Guest_name'] . " - " . $row['Guest_id'] . "</option>";
+                }
+                // Free result set
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+        </select>
+        </div> 
+        Hosts
+        <div class="col">
+            <select class="form-control form-check-inline" id="sel2" name="sel2">
+              <option>--None--</option>
+                      <?php  $sql = "SELECT * FROM episode";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['ep_title'] . "</option>";
+                }
+                // Free result set
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+            </select>
+        </div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
 </div>
