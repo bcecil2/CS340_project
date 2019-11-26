@@ -6,7 +6,7 @@ function debug_to_console($data) {
 
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-header('Location: https://web.engr.oregonstate.edu/~cecilbl/add.php');
+header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/add.php');
   require_once 'connectvars.php';
   $pName = "";
   $days = "";
