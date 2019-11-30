@@ -59,7 +59,6 @@ if($result = mysqli_query($link, $sql)){
             echo "<tr>";
             echo "<th>Podcast Name</th>";
             echo "<th>Rating</th>";
-            echo "<th>Count</th>";
             echo "</tr>";
                 echo "</thead>";
                 echo "<tbody>";
@@ -67,7 +66,6 @@ if($result = mysqli_query($link, $sql)){
                     echo "<tr>";
                     echo "<td>" . $row['Pname'] . "</td>";
                     echo "<td>" . $row['rating'] . "</td>";
-                    echo "<td>" . $row['rCount'] . "</td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";                            
