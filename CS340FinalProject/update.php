@@ -2,7 +2,7 @@
 <!-- Add Part Info to Table Part -->
 <?php
 		$currentpage="Add ";
-    include 'dumpHosts.php';
+    require_once "connectvars.php";
 ?>
 <html>
 	<head>
@@ -170,7 +170,7 @@
         ?>
         </select>
         </div> 
-        Hosts
+        Appeared On
         <div class="col">
             <select class="form-control form-check-inline" id="sel2" name="sel2">
               <option>--None--</option>
