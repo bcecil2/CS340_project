@@ -3,6 +3,7 @@
 <?php
 		$currentpage="Add ";
     require_once "connectvars.php";
+    include "filter.php";
 ?>
 <html>
 	<head>
@@ -19,11 +20,11 @@
 
 <!-- Name -->
 <div class="container">
-    <form method="post" action="filter.php">
+    <form method="post" action="#">
     	<div class="form-group">
         <label for="pname">Podcast Category</label>
         <select class="form-control form-check-inline" id="sel1" name="sel1">
-            <option>--None--</option>
+            <option></option>
             <?php  $sql = "SELECT Gtype FROM Podcast";
               if($result = mysqli_query($link, $sql)){
           if(mysqli_num_rows($result) > 0){
@@ -44,7 +45,7 @@
       <div class="form-group">
         <label for="pname">Host Name</label>
         <select class="form-control form-check-inline" id="sel2" name="sel2">
-            <option>--None--</option>
+            <option></option>
                       <?php  $sql = "SELECT * FROM Host";
       if($result = mysqli_query($link, $sql)){
           if(mysqli_num_rows($result) > 0){
@@ -69,8 +70,8 @@
       <div class="form-group">
         <label for="pname">Guest</label>
         <select class="form-control form-check-inline" id="sel3" name="sel3">
-            <option>--None--</option>
-            <?php  $sql = "SELECT Guest_name FROM Guest";
+            <option></option>
+            <?php  $sql = "SELECT * FROM Guest";
               if($result = mysqli_query($link, $sql)){
           if(mysqli_num_rows($result) > 0){
                 while($row = mysqli_fetch_array($result)){
@@ -89,6 +90,34 @@
       </div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
+    <div class="container">
+      <?php $sql = genQuery();
+            if($result = mysqli_query($link, $sql)){
+                if(mysqli_num_rows($result) > 0){
+                    echo "<table class='table table-bordered table-striped'>";
+                    echo "<thead>";
+                    echo "<tr>";
+                    echo "<th>Podcast Name</th>";
+                    echo "</tr>";
+                    echo "</thead>";
+                    echo "<tbody>";
+                    while($row = mysqli_fetch_array($result)){
+                      echo "<tr>";
+                      echo "<td>" . $row['Pname'] . "</td>";
+                      echo "</tr>";
+                    }
+                    echo "</tbody>";                            
+                    echo "</table>";
+                } else {
+                  echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
+                }
+            } else {
+              echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
+            }
+            
+       ?>
+    </div>
+    
 </div>
 
 
