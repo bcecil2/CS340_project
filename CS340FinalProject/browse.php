@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-		$currentpage="Add ";
+		$currentpage="Browse";
     require_once "connectvars.php";
     include "filter.php";
 ?>
@@ -31,13 +31,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['Gtype'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "not able to execute $sql. " . mysqli_error($link);
         }
         ?>
         </select>
@@ -52,13 +51,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo " not able to execute $sql. " . mysqli_error($link);
         }
         ?>
       </select>
@@ -73,19 +71,18 @@
             <option></option>
             <?php  $sql = "SELECT * FROM Guest";
               if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['Guest_name'] . " - " . $row ['Guest_id'] ."</option>";
+                  }
+                  mysqli_free_result($result);
+                } else {
+                  echo "<p class='lead'><em>No records were found.</em></p>";
                 }
-                // Free result set
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
+              } else {
+                echo "not able to execute $sql. " . mysqli_error($link);
+              }
+            ?>
         </select>
       </div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
@@ -112,9 +109,8 @@
                   echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
                 }
             } else {
-              echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
-            }
-            
+              echo "not able to execute $sql. " . mysqli_error($link);
+            }     
        ?>
     </div>
     

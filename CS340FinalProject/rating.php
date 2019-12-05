@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Add Part Info to Table Part -->
 <?php
-		$currentpage="Add ";
+		$currentpage="Rate";
     include 'dumpHosts.php';
 ?>
 <html>
