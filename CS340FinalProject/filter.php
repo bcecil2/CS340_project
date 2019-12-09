@@ -10,7 +10,7 @@ function debug_to_console($data) {
 function isEmpty($i){
     return empty($i) && $i != 0;
 }
-header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/browse.php');
+//header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/browse.php');
 function genQuery(){
   require_once 'connectvars.php';
 
@@ -32,12 +32,12 @@ function genQuery(){
         $input_n = trim($_POST["sel2"]);
         if(!empty($input_n)){
            $argsA[1] = (int) (split("-", ($_POST["sel2"]))[1]);
-           $isActive[1] = 1; 
+           $isActive[1] = 1;
         }
-        
-        
 
-       
+
+
+
         $input_num = trim($_POST["pRating"]);
         //debug_to_console($input_num);
         if(empty($input_num)){
@@ -50,11 +50,11 @@ function genQuery(){
             $isActive[2] = 1;
         }
 
-        
+
         $input_g = trim($_POST["sel3"]);
         if(!empty($input_g)){
            $argsA[3] = (int) (split("-", ($_POST["sel3"]))[1]);
-           $isActive[3] = 1; 
+           $isActive[3] = 1;
         }
 
         $stmt = "";
@@ -70,7 +70,7 @@ function genQuery(){
         if($isActive[1]){
             if(!empty($stmt)){
                 $stmt .= " INTERSECT " . $filterHost;
-                $stmt = str_replace('?', $argsA[1], $stmt);  
+                $stmt = str_replace('?', $argsA[1], $stmt);
             }else{
                 $stmt = $filterHost;
                 $stmt = str_replace('?', $argsA[1], $stmt);
@@ -79,7 +79,7 @@ function genQuery(){
         if($isActive[2]){
             if(!empty($stmt)){
                 $stmt .= " INTERSECT " . $filterRating;
-                $stmt = str_replace('?', $argsA[2], $stmt);  
+                $stmt = str_replace('?', $argsA[2], $stmt);
             }else{
                 $stmt = $filterRating;
                 $stmt = str_replace('?', $argsA[2], $stmt);
@@ -88,7 +88,7 @@ function genQuery(){
         if($isActive[3]){
             if(!empty($stmt)){
                 $stmt .= " INTERSECT " . $filterGuest;
-                $stmt = str_replace('?', $argsA[3], $stmt);  
+                $stmt = str_replace('?', $argsA[3], $stmt);
             }else{
                 $stmt = $filterGuest;
                 $stmt = str_replace('?', $argsA[3], $stmt);
