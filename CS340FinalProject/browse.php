@@ -56,7 +56,6 @@
           	while($row = mysqli_fetch_array($result)){
               echo "<option>" . $row ['Gtype'] . "</option>";
           	}
-          // Free result set
           mysqli_free_result($result);
       		} else {
           	echo "<p class='lead'><em>No records were found.</em></p>";
@@ -79,7 +78,6 @@
             while($row = mysqli_fetch_array($result)){
               echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
             }
-            // Free result set
             mysqli_free_result($result);
       		} else {
             echo "<p class='lead'><em>No records were found.</em></p>";
@@ -90,6 +88,7 @@
     	?>
   	</select>
   </div>
+
 
 
 
@@ -113,6 +112,7 @@
       ?>
     </select>
     </div>
+
 
       <div class="form-group">
         <label for="pname">Rating</label>
