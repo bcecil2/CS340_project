@@ -70,7 +70,7 @@
 	<div class="container">
 		<h1>Add a New Host:</h1>
 		<br>
-    <form method="post" action="addHost.php">
+    <form method="post" action="addHost.php" id="host">
     	<div class="form-group">
       	<label for="pname">Host Name</label>
       	<input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
@@ -83,7 +83,7 @@
 	<div class="container">
 		<h1>Add a New Guest:</h1>
 		<br>
-	  <form method="post" action="addGuest.php">
+	  <form method="post" action="addGuest.php" id="geust">
 	  	<div class="form-group">
 	    	<label for="pname">Guest Name</label>
 	    	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
@@ -96,7 +96,7 @@
 	<div class="container">
 		<h1>Add a New Episode:</h1>
 		<br>
-    <form method="post" action="addEpisode.php">
+    <form method="post" action="addEpisode.php" id="episode">
     	<div class="form-group">
       	<label for="pname">Episode Name</label>
       	<input type="name" class="form-control" id="eName" aria-describedby="emailHelp" placeholder="Enter Episode Name" name="eName">
@@ -134,7 +134,7 @@
 	<div class="container">
 		<h1>Add a New Schedule:</h1>
 		<br>
-    <form method="post" action="addSched.php">
+    <form method="post" action="addSched.php" id="schedule">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
         <input type="gtype" class="form-control" id="pName
