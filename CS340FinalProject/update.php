@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <!-- Add Part Info to Table Part -->
 <?php
-<<<<<<< HEAD
 		$currentpage="Add";
-=======
-		$currentpage="Update";
-<<<<<<< HEAD
-    require_once "./connectvars.php";
-=======
->>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
-    require_once "connectvars.php";
 
->>>>>>> 8c08149977edf05d1070e1e8297f47e7e21fef91
+		$currentpage="Update";
+    require_once "connectvars.php";
 ?>
 <html>
 	<head>

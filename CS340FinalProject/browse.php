@@ -41,7 +41,6 @@
 
 <!-- Name -->
 <div class="container">
-<<<<<<< HEAD
 	<h1>Browse Podcasts:</h1>
 	<br>
   <form method="post" action="#">
@@ -90,8 +89,6 @@
     	?>
   	</select>
   </div>
-
-=======
     <form method="post" action="#">
     	<div class="form-group">
         <label for="pname">Podcast Category</label>
@@ -133,7 +130,7 @@
         ?>
       </select>
       </div>
->>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
+
       <div class="form-group">
         <label for="pname">Rating</label>
         <input type="name" class="form-control" id="pRating"  placeholder="Enter Podcast Rating" name="pRating">
@@ -182,18 +179,8 @@
                   echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
                 }
             } else {
-<<<<<<< HEAD
-              //echo "not able to execute $sql. " . mysqli_error($link);
-=======
-<<<<<<< HEAD
               echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
-            }
-
-=======
-              echo "not able to execute $sql. " . mysqli_error($link);
->>>>>>> 8c08149977edf05d1070e1e8297f47e7e21fef91
             }     
->>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
        ?>
     </div>
 
