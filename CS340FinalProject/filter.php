@@ -10,7 +10,7 @@ function debug_to_console($data) {
 function isEmpty($i){
     return empty($i) && $i != 0;
 }
-//header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/browse.php');
+
 function genQuery(){
   require_once 'connectvars.php';
 
@@ -39,12 +39,11 @@ function genQuery(){
 
 
         $input_num = trim($_POST["pRating"]);
-        //debug_to_console($input_num);
         if(empty($input_num)){
             $num_err = "Please enter a number.";
             $argsA[3] = -1;
-        } elseif(!filter_var($input_num, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[1-9][0-9]*$/")))){
-            $num_err = "Please enter a valid number.";
+        } elseif($input_num <= 0 || $input_num > 10 ){
+            $argsA[3] = -1;
         } else{
             $argsA[2] = (int)$input_num;
             $isActive[2] = 1;
@@ -58,7 +57,8 @@ function genQuery(){
         }
 
         $stmt = "";
-        // Prepare an insert statement
+
+
         $filterCategory = "(SELECT Pname FROM Podcast WHERE Gtype = ?)";
         $filterHost = "(SELECT Pname FROM Hosts WHERE Hosts.host_id = ?)";
         $filterRating = "(SELECT Pname FROM Podcast WHERE rating >= ?)";
@@ -94,11 +94,8 @@ function genQuery(){
                 $stmt = str_replace('?', $argsA[3], $stmt);
             }
         }
-        //print_r($stmt);
         return $stmt;
   }
   }
 }
-
-//genQuery();
 ?>
