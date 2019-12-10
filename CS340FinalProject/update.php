@@ -15,6 +15,11 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	    //src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	  </script>
+    <style type="text/css">
+      .err{
+        color: red;
+      }
+    </style>
 
 	<!-- Navbar: -->
 	  <nav class="navbar navbar-inverse">
@@ -45,7 +50,7 @@
 
 <!-- Host -->
 <div class="container">
-    <form method="post" action="updateHost.php">
+    <form method="post" action="updateHost.php" id="host">
       <div class="form-group">
         <label for="pname">New Host Name</label>
         <input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
@@ -121,7 +126,7 @@
 
 <!--Guest-->
 <div class="container">
-    <form method="post" action="updateGuest.php">
+    <form method="post" action="updateGuest.php" id="guest">
     	<div class="form-group">
       	<label for="pname">New Guest Name</label>
       	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
@@ -194,7 +199,7 @@
 
 <!--Schedule-->
 <div class="container">
-    <form method="post" action="updateSched.php">
+    <form method="post" action="updateSched.php" id="sched">
     	<div class="form-group">
       	<label for="pname">New Schedule</label>
         <input type="name" class="form-control" id="days" placeholder="Enter Initals of Days Aired" name="days">
@@ -225,3 +230,75 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#host').submit(function(e){
+    $(".err").remove();
+    var hName = $('#host #hName').val();
+    var oldH = $("#hostsel option:selected").text();
+    var sel1 = $("#host #sel1 option:selected").text(); 
+    var sel2 = $("#host #sel2 option:selected").text();
+    if(hName == ""){
+      e.preventDefault();
+      $('#host #hName').after('<p class=err> Host must have a name </p>');
+    }
+    if(oldH == "--None--"){
+      e.preventDefault();
+      $('#host #hostsel').after('<p class=err> Please select a host to update</p>');
+    }
+
+    if((sel1 != "--None--" && sel2 == "--None--") || (sel2 != "--None--" && sel1 == "--None--")){
+      e.preventDefault();
+      $('#host #sel2').after('<p class=err> please connect with a host or podcast </p>');
+    }
+  });
+}); 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#guest').submit(function(e){
+    $(".err").remove();
+    var gName = $('#guest #gName').val();
+    var oldG = $("#guestsel option:selected").text();
+    var sel1 = $("#guest #sel1 option:selected").text(); 
+    var sel2 = $("#guest #sel2 option:selected").text();
+    if(gName == ""){
+      e.preventDefault();
+      $('#guest #gName').after('<p class=err> Guest must have a name </p>');
+    }
+    if(oldG == "--None--"){
+      e.preventDefault();
+      $('#guest #guestsel').after('<p class=err> Please select a guest to update</p>');
+    }
+
+    if((sel1 != "--None--" && sel2 == "--None--") || (sel2 != "--None--" && sel1 == "--None--")){
+      e.preventDefault();
+      $('#guest #sel2').after('<p class=err> please connect with a guest or podcast</p>');
+    }
+
+  });
+}); 
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#sched').submit(function(e){
+    $(".err").remove();
+    var days = $('#sched #days').val();
+    var oldS = $("#schsel option:selected").text();
+    if(days == ""){
+      e.preventDefault();
+      $('#sched #days').after('<p class=err> Schedule must have days</p>');
+    }
+    if(oldS == "--None--"){
+      e.preventDefault();
+      $('#sched #schsel').after('<p class=err> Please select a schedule to update</p>');
+    }
+  });
+}); 
+</script>
+
+
