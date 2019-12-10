@@ -13,20 +13,16 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/ad
 
   if(isset($_POST['submit'])){
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate name
-
-    	//TODO: need to use sql to check if inputted name is a podcast that already exits, its a foreign key so it has to be
-        $input_name = trim($_POST["pName"]);
-        if(empty($input_name)){
-            $name_err = "Please enter a name.";
-        } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
-            $name_err = "Please enter a valid name.";
-        } else{
-        	$query = "SELECT Pname FROM Podcast WHERE Pname = \"$input_name\"";
-        	$res = mysqli_query($link,$query);
-        	if(mysqli_num_rows($res) == 1){
-        		$pName = $input_name;
-        	}
+        $input_name = $_POST["sel1"];
+        debug_to_console($input_name);
+        $query = "SELECT pname FROM Schedule WHERE pname = \"$input_name\"";
+        $res = mysqli_query($link,$query);
+        debug_to_console(mysqli_num_rows($res));
+        if(mysqli_num_rows($res) == 0){
+            debug_to_console("here");
+        	$pName = $_POST["sel1"];
+        } else {
+            // add exiting code to alert user insert failed
         }
         
         
