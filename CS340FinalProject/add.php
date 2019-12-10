@@ -14,6 +14,11 @@
       src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
     </script>
+    <style type="text/css">
+      .err{
+        color: red;
+      }
+    </style>
 
 		<!-- Main Navbar: -->
 	  <nav class="navbar navbar-inverse">
@@ -52,15 +57,14 @@
 	<div class="container">
 		<h1>Add a New Podcast:</h1>
 		<br>
-    <form method="post" action="addPodcast.php">
+    <form method="post" action="addPodcast.php" id="podcast">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
-      	<input type="name" class="form-control" id="pName" aria-describedby="emailHelp" placeholder="Enter Podcast Name" name="pName">
+      	<input type="name" class="form-control" id="pName" placeholder="Enter Podcast Name" name="pName">
     	</div>
     	<div class="form-group">
       	<label for="genre">Genre</label>
-      	<input type="gtype" class="form-control" id="gtype
-      	" placeholder="Enter Genre" name=gtype>
+      	<input type="gtype" class="form-control" id="gtype" placeholder="Enter Genre" name="gtype">
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
@@ -83,7 +87,7 @@
 	<div class="container">
 		<h1>Add a New Guest:</h1>
 		<br>
-	  <form method="post" action="addGuest.php" id="geust">
+	  <form method="post" action="addGuest.php" id="guest">
 	  	<div class="form-group">
 	    	<label for="pname">Guest Name</label>
 	    	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
@@ -99,12 +103,11 @@
     <form method="post" action="addEpisode.php" id="episode">
     	<div class="form-group">
       	<label for="pname">Episode Name</label>
-      	<input type="name" class="form-control" id="eName" aria-describedby="emailHelp" placeholder="Enter Episode Name" name="eName">
+      	<input type="name" class="form-control" id="eName" placeholder="Enter Episode Name" name="eName">
     	</div>
     	<div class="form-group">
       	<label for="genre">Episode Number</label>
-      	<input type="gtype" class="form-control" id="epnum
-      	" placeholder="Enter Episode Number" name=epnum>
+      	<input type="gtype" class="form-control" id="epnum" placeholder="Enter Episode Number" name="epnum">
     	</div>
     	<div class="form-group">
       	<label for="genre">Podcast Name</label>
@@ -137,8 +140,23 @@
     <form method="post" action="addSched.php" id="schedule">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
-        <input type="gtype" class="form-control" id="pName
-        " placeholder="Enter Days Aired" name=pName>
+        <select class="form-control form-check-inline" id="sel1" name="sel1">
+              <option>--None--</option>
+              <?php  $sql = "SELECT * FROM Podcast";
+                if($result = mysqli_query($link, $sql)){
+                  if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+                      echo "<option>" . $row ['Pname'] . "</option>";
+                    }
+                    mysqli_free_result($result);
+                    } else {
+                      echo "<p class='lead'><em>No records were found.</em></p>";
+                    }
+                } else {
+                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                }
+              ?>
+        </select>
     	</div>
     	<div class="form-group">
       	<label for="genre">Days Aired</label>
@@ -152,3 +170,89 @@
 </body>
 </html>
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#podcast').submit(function(e){
+    $(".err").remove();
+    var pName = $('#podcast #pName').val();
+    var gtype = $('#podcast #gtype').val();
+    if(gtype == ""){
+      e.preventDefault();
+      $('#podcast #gtype').after('<p class=err> Podcasts must have a genre </p>');
+    }
+    if(pName == ""){
+      e.preventDefault();
+      $('#podcast #pName').after('<p class=err> Podcasts must have a name </p>');
+    }
+  });
+}); 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#host').submit(function(e){
+    $(".err").remove();
+    var hName = $('#host #hName').val();
+    if(hName == ""){
+      e.preventDefault();
+      $('#host #hName').after('<p class=err> Hosts must have a name </p>');
+    }
+  });
+}); 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#guest').submit(function(e){
+    $(".err").remove();
+    var gName = $('#guest #gName').val();
+    if(gName == ""){
+      e.preventDefault();
+      $('#guest #gName').after('<p class=err> Guests must have a name </p>');
+    }
+  });
+}); 
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#episode').submit(function(e){
+      $(".err").remove();
+      var eName = $('#episode #eName').val();
+      var eNum = $('#episode #epnum').val();
+      var pName = $("#sel1 option:selected").text();
+      console.log(eNum == []);
+      if(eName == ""){
+        e.preventDefault();
+        $('#episode #eName').after('<p class=err> episodes must have a name </p>');
+      }
+
+      if(eNum == []){
+        e.preventDefault();
+        $('#episode #epnum').after('<p class=err> episodes must have a number </p>');
+      }else{
+        var isInteger =  /^[1-9][0-9]*$/;
+        if(!isInteger.test(eNum)){
+          e.preventDefault();
+          $('#episode #epnum').after('<p class=err> episodes must be an integer greater than zero </p>');
+        }
+      }
+
+      if(pName == "--None--"){
+        e.preventDefault();
+        $('#episode #sel1').after('<p class=err> episodes must be related to a podcast </p>');
+      }
+
+  });
+}); 
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#schedule').submit(function(e){
+      $(".err").remove();
+
+  });
+}); 
+</script>
