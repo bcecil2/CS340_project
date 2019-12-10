@@ -157,10 +157,7 @@
 $(document).ready(function(){
   $('#browse').submit(function(e){
     $(".err").remove();
-    //var category = $('#sel1 option:selected').text();
-    //var hostName = $('#sel2 option:selected').text();
     var rating = $('#pRating').val();
-    //var gName = $('#sel3 option:selected').text();
     if(rating != [] && (rating <= 0 || rating > 10 )){
       e.preventDefault();
       $('#pRating').after('<p class=err> Rating must be greater than 0 and less than 11 </p>');
