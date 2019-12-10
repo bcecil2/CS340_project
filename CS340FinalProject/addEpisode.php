@@ -24,7 +24,6 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/ad
             $epName = $input_name;
         }
 
-        //TODO: Actual error checking on this the statement always fails currently
         $input_num = trim($_POST["epnum"]);
         debug_to_console($input_num);
         if(empty($input_num)){
@@ -39,7 +38,7 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/ad
         //$epNum = (int)$input_num;
         
 
-        $input_pname = trim($_POST["epName"]);
+        $input_pname = trim($_POST["sel1"]);
         if(empty($input_pname)){
             $pname_err = "Please enter a name.";
         } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
@@ -54,33 +53,30 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/ad
             }
         }
         
-        
-        // Check input errors before inserting in database
+
         if(empty($name_err) && empty($num_err) && empty($pname_err)){
-        // Prepare an insert statement
+
         $sql = "INSERT INTO episode (ep_number, ep_title, Pname) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
-            // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "iss", $param_num, $param_title, $param_name);
             
-            // Set parameters
+
             $param_num = $epNum;
             $param_title = $epName;
             $param_name = $pName;
-            // Attempt to execute the prepared statement
+
             if(mysqli_stmt_execute($stmt)){
-                // Records created successfully. Redirect to landing page
+
             } else{
                 echo "Something went wrong. Please try again later.";
             }
         }
          
-        // Close statement
+
         mysqli_stmt_close($stmt);
         }
     
-    // Close connection
         mysqli_close($link);
     }
   }

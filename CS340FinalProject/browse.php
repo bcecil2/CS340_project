@@ -28,10 +28,10 @@
 	        <a class="navbar-brand" href="index.html">PodWiki</a>
 	      </div>
 	      <ul class="nav navbar-nav">
-	        <li><a href="index.html">Home</a></li>
+	        <li><a href="index.php">Home</a></li>
 	        <li class="active"><a href="browse.php">Browse</a></li>
 	        <li><a href="rating.php">Ratings</a></li>
-	        <li><a href="#">Schedule</a></li>
+	        <li><a href="schedule.php">Schedule</a></li>
 	        <li><a href="add.php">Insert</a></li>
 	        <li><a href="update.php">Update</a></li>
 	      </ul>
@@ -44,6 +44,7 @@
 	<h1>Browse Podcasts:</h1>
 	<br>
   <form method="post" action="#">
+
 		<!-- Podcast Categroy -->
   	<div class="form-group">
       <label for="pname">Podcast Category</label>
@@ -91,47 +92,27 @@
   </div>
 
 
-    <form method="post" action="#">
-    	<div class="form-group">
-        <label for="pname">Podcast Category</label>
-        <select class="form-control form-check-inline" id="sel1" name="sel1">
-            <option></option>
-            <?php  $sql = "SELECT Gtype FROM Podcast";
-              if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
-                    echo "<option>" . $row ['Gtype'] . "</option>";
-                }
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo "not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="pname">Host Name</label>
-        <select class="form-control form-check-inline" id="sel2" name="sel2">
-            <option></option>
-                      <?php  $sql = "SELECT * FROM Host";
-      if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
-                    echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
-                }
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo " not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
-      </select>
-      </div>
+
+    <div class="form-group">
+      <label for="pname">Host Name</label>
+      <select class="form-control form-check-inline" id="sel2" name="sel2">
+          <option></option>
+                    <?php  $sql = "SELECT * FROM Host";
+    if($result = mysqli_query($link, $sql)){
+        if(mysqli_num_rows($result) > 0){
+              while($row = mysqli_fetch_array($result)){
+                  echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
+              }
+              mysqli_free_result($result);
+          } else {
+              echo "<p class='lead'><em>No records were found.</em></p>";
+          }
+      } else {
+        echo " not able to execute $sql. " . mysqli_error($link);
+      }
+      ?>
+    </select>
+    </div>
 
       <div class="form-group">
         <label for="pname">Rating</label>
@@ -187,7 +168,7 @@
 
 
               echo "not able to execute $sql. " . mysqli_error($link);
-            
+
 
        ?>
     </div>

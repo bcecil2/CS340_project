@@ -43,6 +43,7 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/ad
         // Check input errors before inserting in database
         if(empty($name_err) && empty($days_err)){
         // Prepare an insert statement
+
         $sql = "INSERT INTO Schedule (days, sch_id, pname) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
