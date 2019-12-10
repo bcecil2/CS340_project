@@ -2,6 +2,7 @@
 
 <?php
 		$currentpage="Add ";
+    require_once "connectvars.php";
 ?>
 <html>
 	<head>
@@ -68,8 +69,23 @@
     	</div>
     	<div class="form-group">
       	<label for="genre">Podcast Name</label>
-      	<input type="gtype" class="form-control" id="epName
-      	" placeholder="Enter Podcast Name" name=epName>
+          <select class="form-control form-check-inline" id="sel1" name="sel1">
+              <option>--None--</option>
+              <?php  $sql = "SELECT * FROM Podcast";
+                if($result = mysqli_query($link, $sql)){
+                  if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+                      echo "<option>" . $row ['Pname'] . "</option>";
+                    }
+                    mysqli_free_result($result);
+                    } else {
+                      echo "<p class='lead'><em>No records were found.</em></p>";
+                    }
+                } else {
+                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                }
+              ?>
+        </select>
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
@@ -80,7 +96,8 @@
     <form method="post" action="addSched.php">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
-      	<input type="name" class="form-control" id="pName" aria-describedby="emailHelp" placeholder="Enter Podcast Name" name="pName">
+        <input type="gtype" class="form-control" id="pName
+        " placeholder="Enter Days Aired" name=pName>
     	</div>
     	<div class="form-group">
       	<label for="genre">Days Aired</label>

@@ -109,7 +109,7 @@
                   echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
                 }
             } else {
-              echo "not able to execute $sql. " . mysqli_error($link);
+              //echo "not able to execute $sql. " . mysqli_error($link);
             }     
        ?>
     </div>
