@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <!-- Add Part Info to Table Part -->
 <?php
+<<<<<<< HEAD
 		$currentpage="Add";
+=======
+		$currentpage="Update";
+>>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
     require_once "connectvars.php";
 
 ?>

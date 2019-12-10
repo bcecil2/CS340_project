@@ -41,6 +41,7 @@
 
 <!-- Name -->
 <div class="container">
+<<<<<<< HEAD
 	<h1>Browse Podcasts:</h1>
 	<br>
   <form method="post" action="#">
@@ -90,6 +91,49 @@
   	</select>
   </div>
 
+=======
+    <form method="post" action="#">
+    	<div class="form-group">
+        <label for="pname">Podcast Category</label>
+        <select class="form-control form-check-inline" id="sel1" name="sel1">
+            <option></option>
+            <?php  $sql = "SELECT Gtype FROM Podcast";
+              if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['Gtype'] . "</option>";
+                }
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="pname">Host Name</label>
+        <select class="form-control form-check-inline" id="sel2" name="sel2">
+            <option></option>
+                      <?php  $sql = "SELECT * FROM Host";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
+                }
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo " not able to execute $sql. " . mysqli_error($link);
+        }
+        ?>
+      </select>
+      </div>
+>>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
       <div class="form-group">
         <label for="pname">Rating</label>
         <input type="name" class="form-control" id="pRating"  placeholder="Enter Podcast Rating" name="pRating">
@@ -100,19 +144,18 @@
             <option></option>
             <?php  $sql = "SELECT * FROM Guest";
               if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-                while($row = mysqli_fetch_array($result)){
+                if(mysqli_num_rows($result) > 0){
+                  while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['Guest_name'] . " - " . $row ['Guest_id'] ."</option>";
+                  }
+                  mysqli_free_result($result);
+                } else {
+                  echo "<p class='lead'><em>No records were found.</em></p>";
                 }
-                // Free result set
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
+              } else {
+                echo "not able to execute $sql. " . mysqli_error($link);
+              }
+            ?>
         </select>
       </div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
@@ -139,9 +182,14 @@
                   echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
                 }
             } else {
+<<<<<<< HEAD
               echo "<p class='lead'> <em>No matching podcasts were found</em></p>";
             }
 
+=======
+              echo "not able to execute $sql. " . mysqli_error($link);
+            }     
+>>>>>>> 64da7b4203bb1fed9163bee0115880af1e45ae28
        ?>
     </div>
 
