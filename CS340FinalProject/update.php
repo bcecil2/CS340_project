@@ -9,14 +9,10 @@
 		<title>Add</title>
 		<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-		<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> -->
-		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></script> -->
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	  <script
 	    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	    //src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	  </script>
 
@@ -24,12 +20,13 @@
 	  <nav class="navbar navbar-inverse">
 	    <div class="container-fluid">
 	      <div class="navbar-header">
-	        <a class="navbar-brand" href="index.php">PodWiki</a>
+	        <a class="navbar-brand" href="index.html">PodWiki</a>
 	      </div>
 	      <ul class="nav navbar-nav">
 	        <li><a href="index.php">Home</a></li>
 	        <li><a href="browse.php">Browse</a></li>
 	        <li><a href="rating.php">Ratings</a></li>
+	        <li><a href="schedule.php">Schedule</a></li>
 	        <li><a href="add.php">Insert</a></li>
 	        <li class="active"><a href="update.php">Update</a></li>
 	      </ul>
@@ -48,42 +45,30 @@
 
 <!-- Host -->
 <div class="container">
-      <?php  $sql = "SELECT * FROM Host";
-      if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-            echo "<table class='table table-bordered table-striped'>";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>Host ID#</th>";
-            echo "<th>Name</th>";
-            echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                while($row = mysqli_fetch_array($result)){
-                    echo "<tr>";
-                    echo "<td>" . $row['host_id'] . "</td>";
-                    echo "<td>" . $row['host_name'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-                // Free result set
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
     <form method="post" action="updateHost.php">
       <div class="form-group">
         <label for="pname">New Host Name</label>
         <input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
       </div>
       <div class="form-group">
-        <label for="id">Host id</label>
-        <input type="name" class="form-control" id="hid" aria-describedby="emailHelp" placeholder="Enter Hosts ID" name="hid">
+        <label for="id">Old Host Name</label>
+        <select class="form-control form-check-inline" id="hostsel" name="hostsel">
+            <option>--None--</option>
+          <?php  $sql = "SELECT * FROM Host";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
+                }
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR" . mysqli_error($link);
+        }
+        ?>
+        </select>
       </div>
       <div class="row">
         <label for="sel1">Who Hosts What?</label>
@@ -96,13 +81,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['host_name'] . " - " . $row['host_id'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "ERROR" . mysqli_error($link);
         }
         ?>
         </select>
@@ -117,13 +101,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['Pname'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "ERROR" . mysqli_error($link);
         }
         ?>
             </select>
@@ -138,34 +121,6 @@
 
 <!--Guest-->
 <div class="container">
-      <?php  $sql = "SELECT * FROM Guest";
-      if($result = mysqli_query($link, $sql)){
-          if(mysqli_num_rows($result) > 0){
-            echo "<table class='table table-bordered table-striped'>";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>Guest ID#</th>";
-            echo "<th>Name</th>";
-            echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                while($row = mysqli_fetch_array($result)){
-                    echo "<tr>";
-                    echo "<td>" . $row['Guest_id'] . "</td>";
-                    echo "<td>" . $row['Guest_name'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
-                echo "</table>";
-                // Free result set
-                mysqli_free_result($result);
-            } else {
-                echo "<p class='lead'><em>No records were found.</em></p>";
-            }
-        } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-        }
-        ?>
     <form method="post" action="updateGuest.php">
     	<div class="form-group">
       	<label for="pname">New Guest Name</label>
@@ -173,7 +128,23 @@
     	</div>
       <div class="form-group">
         <label for="pname">Guest ID</label>
-        <input type="name" class="form-control" id="gid" aria-describedby="emailHelp" placeholder="Enter Guest ID" name="gid">
+        <select class="form-control form-check-inline" id="guestsel" name="guestsel">
+            <option>--None--</option>
+          <?php  $sql = "SELECT * FROM Guest";
+      if($result = mysqli_query($link, $sql)){
+          if(mysqli_num_rows($result) > 0){
+                while($row = mysqli_fetch_array($result)){
+                    echo "<option>" . $row ['Guest_name'] . " - " . $row['Guest_id'] . "</option>";
+                }
+                mysqli_free_result($result);
+            } else {
+                echo "<p class='lead'><em>No records were found.</em></p>";
+            }
+        } else {
+          echo "ERROR" . mysqli_error($link);
+        }
+        ?>
+        </select>
       </div>
       <div class="row">
         <label for="sel1">Who's Appeared Where?</label>
@@ -186,13 +157,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['Guest_name'] . " - " . $row['Guest_id'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "ERROR" . mysqli_error($link);
         }
         ?>
         </select>
@@ -207,13 +177,12 @@
                 while($row = mysqli_fetch_array($result)){
                     echo "<option>" . $row ['ep_title'] . "</option>";
                 }
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "ERROR" . mysqli_error($link);
         }
         ?>
             </select>
@@ -225,46 +194,30 @@
 
 <!--Schedule-->
 <div class="container">
-  <?php  $sql = "SELECT * FROM Schedule";
+    <form method="post" action="updateSched.php">
+    	<div class="form-group">
+      	<label for="pname">New Schedule</label>
+        <input type="name" class="form-control" id="days" placeholder="Enter Initals of Days Aired" name="days">
+    	</div>
+    	<div class="form-group">
+      	<label for="genre">Schedule ID</label>
+        <select class="form-control form-check-inline" id="schsel" name="schsel">
+              <option>--None--</option>
+                      <?php  $sql = "SELECT * FROM Schedule";
       if($result = mysqli_query($link, $sql)){
           if(mysqli_num_rows($result) > 0){
-            echo "<table class='table table-bordered table-striped'>";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>Schedule ID#</th>";
-            echo "<th>Podcast Name</th>";
-            echo "<th>Days Aired</th>";
-            echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
                 while($row = mysqli_fetch_array($result)){
-                    echo "<tr>";
-                    echo "<td>" . $row['sch_id'] . "</td>";
-                    echo "<td>" . $row['pname'] . "</td>";
-                    echo "<td>" . $row['days'] . "</td>";
-                    echo "</tr>";
+                    echo "<option>" . $row ['pname'] . " - " . $row['sch_id'] . "</option>";
                 }
-                echo "</tbody>";
-                echo "</table>";
-                // Free result set
                 mysqli_free_result($result);
             } else {
                 echo "<p class='lead'><em>No records were found.</em></p>";
             }
         } else {
-          echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+          echo "ERROR" . mysqli_error($link);
         }
         ?>
-
-    <form method="post" action="updateSched.php">
-    	<div class="form-group">
-      	<label for="pname">New Schedule</label>
-      	<input type="name" class="form-control" id="days" aria-describedby="emailHelp" placeholder="Enter Days" name="days">
-    	</div>
-    	<div class="form-group">
-      	<label for="genre">Schedule ID</label>
-      	<input type="gtype" class="form-control" id="schid
-      	" placeholder="Enter Schedule ID" name=schid>
+        </select>
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
