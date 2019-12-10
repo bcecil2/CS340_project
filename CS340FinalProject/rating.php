@@ -27,7 +27,7 @@
 				<a class="navbar-brand" href="index.html">PodWiki</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="index.html">Home</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="browse.php">Browse</a></li>
 				<li class="active"><a href="rating.php">Ratings</a></li>
 				<li><a href="#">Schedule</a></li>
