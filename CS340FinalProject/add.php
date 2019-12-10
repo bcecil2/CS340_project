@@ -38,14 +38,15 @@
 
 
 		<!-- Second Navbar -->
-		<div class="container">
+		<div class="container" style="text-align: center;" id="navbar">
 			<div class="well" style="background-color: light-grey;">
 				<h2>Select what you'd like to add:</h2>
 				<br>
-				<a href="#" class="btn btn-info" role="button">Link Button</a>
-				<button type="button" class="btn btn-info">Button</button>
-
-
+        <button type="button" class="btn btn-info" target="1">New Podcast</button>
+          <button type="button" class="btn btn-info" target="2">New Host</button>
+          <button type="button" class="btn btn-info" target="3">New Guest</button>
+          <button type="button" class="btn btn-info" target="4">New Episode</button>
+          <button type="button" class="btn btn-info" target="5">New Schedule</button>
 			</div>
 		</div>
 
@@ -55,9 +56,9 @@
 
 	<!-- Podcast -->
 	<div class="container">
-		<h1>Add a New Podcast:</h1>
 		<br>
-    <form method="post" action="addPodcast.php" id="podcast">
+    <form method="post" action="addPodcast.php"  id="podcast" class="hideable div1">
+      <h1>Add a New Podcast:</h1>
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
       	<input type="name" class="form-control" id="pName" placeholder="Enter Podcast Name" name="pName">
@@ -72,9 +73,9 @@
 
 	<!-- Host -->
 	<div class="container">
-		<h1>Add a New Host:</h1>
 		<br>
-    <form method="post" action="addHost.php" id="host">
+    <form method="post" action="addHost.php" id="host" style="display: none;" class="hideable div2">
+      <h1>Add a New Host:</h1>
     	<div class="form-group">
       	<label for="pname">Host Name</label>
       	<input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
@@ -85,9 +86,10 @@
 
 	<!--Guest-->
 	<div class="container">
-		<h1>Add a New Guest:</h1>
+
 		<br>
-	  <form method="post" action="addGuest.php" id="guest">
+	  <form method="post" action="addGuest.php" id="guest" style="display: none;" class="hideable div3">
+      <h1>Add a New Guest:</h1>
 	  	<div class="form-group">
 	    	<label for="pname">Guest Name</label>
 	    	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
@@ -98,9 +100,10 @@
 
 	<!--Episode-->
 	<div class="container">
-		<h1>Add a New Episode:</h1>
+		
 		<br>
-    <form method="post" action="addEpisode.php" id="episode">
+    <form method="post" action="addEpisode.php" id="episode" style="display: none;" class="hideable div4">
+      <h1>Add a New Episode:</h1>
     	<div class="form-group">
       	<label for="pname">Episode Name</label>
       	<input type="name" class="form-control" id="eName" placeholder="Enter Episode Name" name="eName">
@@ -135,9 +138,9 @@
 
 	<!--Schedule-->
 	<div class="container">
-		<h1>Add a New Schedule:</h1>
 		<br>
-    <form method="post" action="addSched.php" id="schedule">
+    <form method="post" action="addSched.php" id="schedule" style="display: none;" class="hideable div5">
+      <h1>Add a New Schedule:</h1>
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
         <select class="form-control form-check-inline" id="sel1" name="sel1">
@@ -153,15 +156,14 @@
                       echo "<p class='lead'><em>No records were found.</em></p>";
                     }
                 } else {
-                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                  echo "ERROR" . mysqli_error($link);
                 }
               ?>
         </select>
     	</div>
     	<div class="form-group">
       	<label for="genre">Days Aired</label>
-      	<input type="gtype" class="form-control" id="days
-      	" placeholder="Enter Days Aired" name=days>
+      	<input type="gtype" class="form-control" id="days" placeholder="Enter Days Aired" name=days>
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
@@ -173,6 +175,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $('#podcast').submit(function(e){
+    alert("in");
     $(".err").remove();
     var pName = $('#podcast #pName').val();
     var gtype = $('#podcast #gtype').val();
@@ -252,7 +255,31 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('#schedule').submit(function(e){
       $(".err").remove();
+      var pName = $("#schedule #sel1 option:selected").text();
+      var daysAired = $("#schedule #days").val();
+      if(pName == "--None--"){
+        e.preventDefault();
+        $('#schedule #sel1').after('<p class=err> Please choose a podcast </p>');
+      }
+
+      if(daysAired == ""){
+        e.preventDefault();
+        $('#schedule #days').after('<p class=err> Please enter days aired</p>');
+      }
 
   });
 }); 
+</script>
+
+
+
+
+    <!-- JavaScript for showing and hiding forms. -->
+<script type="text/javascript">
+  $(function() {
+   $('#navbar .btn').click(function() {
+      $('.hideable').hide();
+      $('.div' + $(this).attr('target')).show();
+    });
+  });
 </script>
