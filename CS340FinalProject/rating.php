@@ -10,11 +10,12 @@
 	<title>Ratings</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-	<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></script> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<style type="text/css">
+      .err{
+        color: red;
+      }
+    </style>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
@@ -45,7 +46,7 @@
 	<div class="container">
 		<h1>Ratings:</h1>
 		<br>
-	    <form method="post" action="ratePodcast.php">
+	    <form method="post" action="ratePodcast.php" id="rate">
 	      <div class="form-group">
 	        <label for="pname">Podcast Name</label>
 	        <select class="form-control form-check-inline" id="sel1" name="sel1">
@@ -68,7 +69,7 @@
 	      </div>
 	      <div class="form-group">
 	        <label for="id">Your Rating</label>
-	        <input type="name" class="form-control" id="rating"  placeholder="Enter a Rating between 0-10" name="rating">
+	        <input type="name" class="form-control" id="rating"  placeholder="Enter a Rating between 1-10" name="rating">
 	      </div>
 	    	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
 	  	</form>
@@ -106,3 +107,16 @@
 	</div>
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#rate').submit(function(e){
+    $(".err").remove();
+    var rating = $('#rating').val();
+    if(rating != [] && (rating <= 0 || rating > 10 )){
+      e.preventDefault();
+      $('#rating').after('<p class=err> Rating must be greater than 0 and less than 11 </p>');
+    }
+  });
+}); 
+</script>
