@@ -24,13 +24,12 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">PodWiki</a>
+				<a class="navbar-brand" href="index.php">PodWiki</a>
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="browse.php">Browse</a></li>
 				<li class="active"><a href="rating.php">Ratings</a></li>
-				<li><a href="schedule.php">Schedule</a></li>
 				<li><a href="add.php">Insert</a></li>
 				<li><a href="update.php">Update</a></li>
 			</ul>

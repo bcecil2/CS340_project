@@ -19,29 +19,43 @@
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
     </script>
 
-		<!-- Navbar: -->
+		<!-- Main Navbar: -->
 	  <nav class="navbar navbar-inverse">
 	    <div class="container-fluid">
 	      <div class="navbar-header">
-	        <a class="navbar-brand" href="index.html">PodWiki</a>
+	        <a class="navbar-brand" href="index.php">PodWiki</a>
 	      </div>
 	      <ul class="nav navbar-nav">
 	        <li><a href="index.php">Home</a></li>
 	        <li><a href="browse.php">Browse</a></li>
 	        <li><a href="rating.php">Ratings</a></li>
-	        <li><a href="schedule.php">Schedule</a></li>
 	        <li class="active"><a href="add.php">Insert</a></li>
 	        <li><a href="update.php">Update</a></li>
 	      </ul>
 	    </div>
 	  </nav>
-	  <!-- End Navbar -->
+
+
+		<!-- Second Navbar -->
+		<div class="container">
+			<div class="well" style="background-color: light-grey;">
+				<h2>Select what you'd like to add:</h2>
+				<br>
+				<a href="#" class="btn btn-info" role="button">Link Button</a>
+				<button type="button" class="btn btn-info">Button</button>
+
+
+			</div>
+		</div>
+
 
 	</head>
 <body>
 
-<!-- Podcast -->
-<div class="container">
+	<!-- Podcast -->
+	<div class="container">
+		<h1>Add a New Podcast:</h1>
+		<br>
     <form method="post" action="addPodcast.php">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
@@ -54,10 +68,12 @@
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
-</div>
+	</div>
 
-<!-- Host -->
-<div class="container">
+	<!-- Host -->
+	<div class="container">
+		<h1>Add a New Host:</h1>
+		<br>
     <form method="post" action="addHost.php">
     	<div class="form-group">
       	<label for="pname">Host Name</label>
@@ -65,21 +81,25 @@
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
-</div>
+	</div>
 
-<!--Guest-->
-<div class="container">
-    <form method="post" action="addGuest.php">
-    	<div class="form-group">
-      	<label for="pname">Guest Name</label>
-      	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
-    	</div>
-    	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
-  	</form>
-</div>
+	<!--Guest-->
+	<div class="container">
+		<h1>Add a New Guest:</h1>
+		<br>
+	  <form method="post" action="addGuest.php">
+	  	<div class="form-group">
+	    	<label for="pname">Guest Name</label>
+	    	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
+	  	</div>
+	  	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+		</form>
+	</div>
 
-<!--Episode-->
-<div class="container">
+	<!--Episode-->
+	<div class="container">
+		<h1>Add a New Episode:</h1>
+		<br>
     <form method="post" action="addEpisode.php">
     	<div class="form-group">
       	<label for="pname">Episode Name</label>
@@ -112,10 +132,12 @@
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
-</div>
+	</div>
 
-<!--Schedule-->
-<div class="container">
+	<!--Schedule-->
+	<div class="container">
+		<h1>Add a New Schedule:</h1>
+		<br>
     <form method="post" action="addSched.php">
     	<div class="form-group">
       	<label for="pname">Podcast Name</label>
@@ -129,7 +151,7 @@
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
-</div>
+	</div>
 
 </body>
 </html>
