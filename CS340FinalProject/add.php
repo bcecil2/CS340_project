@@ -78,7 +78,7 @@
       <h1>Add a New Host:</h1>
     	<div class="form-group">
       	<label for="pname">Host Name</label>
-      	<input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
+      	<input type="name" class="form-control" id="hName"  placeholder="Enter Host Name" name="hName">
     	</div>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
@@ -92,7 +92,7 @@
       <h1>Add a New Guest:</h1>
 	  	<div class="form-group">
 	    	<label for="pname">Guest Name</label>
-	    	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
+	    	<input type="name" class="form-control" id="gName"  placeholder="Enter Guest Name" name="gName">
 	  	</div>
 	  	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
 		</form>
@@ -127,7 +127,7 @@
                       echo "<p class='lead'><em>No records were found.</em></p>";
                     }
                 } else {
-                  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                  echo "ERROR" . mysqli_error($link);
                 }
               ?>
         </select>
