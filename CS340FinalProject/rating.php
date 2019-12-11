@@ -2,7 +2,6 @@
 <!-- Add Part Info to Table Part -->
 <?php
 		$currentpage="Ratings";
-		$currentpage="Rate";
     include 'dumpHosts.php';
 ?>
 <html>
@@ -75,8 +74,9 @@
 	  	</form>
 	</div>
 
+	<br>
 	<div class="container">
-	 <?php  $sql = "SELECT * FROM Podcast";
+	 <?php  $sql = "SELECT * FROM Podcast Where Rating >= 0";
 	if($result = mysqli_query($link, $sql)){
 	          if(mysqli_num_rows($result) > 0){
 	            echo "<table class='table table-bordered table-striped'>";

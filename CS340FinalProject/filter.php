@@ -7,10 +7,6 @@ function debug_to_console($data) {
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
 
-function isEmpty($i){
-    return empty($i) && $i != 0;
-}
-
 function genQuery(){
   require_once 'connectvars.php';
 
