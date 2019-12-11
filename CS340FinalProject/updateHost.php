@@ -14,7 +14,7 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/up
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$input_name = trim($_POST["hName"]);
 			$newName = $input_name;
-			$input_id = (int)trim($_POST["hid"]);
+			$input_id = (int)(split("-", ($_POST["hostsel"]))[1]);
 			$id = $input_id;
 
 			if($_POST["sel1"] != "--None--" && $_POST["sel2"] != "--None--"){

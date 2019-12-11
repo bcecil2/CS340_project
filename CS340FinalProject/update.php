@@ -6,14 +6,13 @@
 ?>
 <html>
 	<head>
-		<title>Add</title>
+		<title>Update</title>
 		<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	  <script
 	    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
-	    //src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js">
 	  </script>
     <style type="text/css">
       .err{
@@ -31,7 +30,6 @@
 	        <li><a href="index.php">Home</a></li>
 	        <li><a href="browse.php">Browse</a></li>
 	        <li><a href="rating.php">Ratings</a></li>
-	        <li><a href="schedule.php">Schedule</a></li>
 	        <li><a href="add.php">Insert</a></li>
 	        <li class="active"><a href="update.php">Update</a></li>
 	      </ul>
@@ -39,6 +37,15 @@
 	  </nav>
 	<!-- End Navbar -->
 
+<div class="container" id="navbar" style="text-align: center;"> 
+      <div class="well" style="background-color: light-grey;">  
+        <h2>Select what you'd like to update:</h2>  
+        <br>  
+          <button type="button" class="btn btn-info" target="1">Upadate Hosts</button>  
+          <button type="button" class="btn btn-info" target="2">Update Guests</button>  
+          <button type="button" class="btn btn-info" target="3">Update Schedules</button> 
+      </div>  
+</div>
 	</head>
 
 
@@ -50,10 +57,12 @@
 
 <!-- Host -->
 <div class="container">
-    <form method="post" action="updateHost.php" id="host">
+    <form method="post" action="updateHost.php" id="host"  class="hideable div1">
+      <h1>Update a Host:</h1>
+      <br>
       <div class="form-group">
         <label for="pname">New Host Name</label>
-        <input type="name" class="form-control" id="hName" aria-describedby="emailHelp" placeholder="Enter Host Name" name="hName">
+        <input type="name" class="form-control" id="hName"  placeholder="Enter Host Name" name="hName">
       </div>
       <div class="form-group">
         <label for="id">Old Host Name</label>
@@ -75,6 +84,9 @@
         ?>
         </select>
       </div>
+      <br>  
+        <h1>Change What They Host:</h1> 
+      <br>
       <div class="row">
         <label for="sel1">Who Hosts What?</label>
           <div class="col">
@@ -126,10 +138,12 @@
 
 <!--Guest-->
 <div class="container">
-    <form method="post" action="updateGuest.php" id="guest">
+    <form method="post" action="updateGuest.php" id="guest" style="display:none;" class="hideable div2">
+      <h1>Update a Guest:</h1>  
+      <br> 
     	<div class="form-group">
       	<label for="pname">New Guest Name</label>
-      	<input type="name" class="form-control" id="gName" aria-describedby="emailHelp" placeholder="Enter Guest Name" name="gName">
+      	<input type="name" class="form-control" id="gName"  placeholder="Enter Guest Name" name="gName">
     	</div>
       <div class="form-group">
         <label for="pname">Guest ID</label>
@@ -151,6 +165,9 @@
         ?>
         </select>
       </div>
+      <br>  
+      <h1>Update Appearances:</h1>  
+      <br>
       <div class="row">
         <label for="sel1">Who's Appeared Where?</label>
           <div class="col">
@@ -192,6 +209,7 @@
         ?>
             </select>
         </div>
+        <br>
     	<button type="submit" class="btn btn-primary" name="submit">Submit</button>
   	</form>
 </div>
@@ -199,7 +217,9 @@
 
 <!--Schedule-->
 <div class="container">
-    <form method="post" action="updateSched.php" id="sched">
+    <form method="post" action="updateSched.php" id="sched" style="display:none;" class="hideable div3">
+      <h1>Update Schedules:</h1>  
+      <br>
     	<div class="form-group">
       	<label for="pname">New Schedule</label>
         <input type="name" class="form-control" id="days" placeholder="Enter Initals of Days Aired" name="days">
@@ -302,3 +322,12 @@ $(document).ready(function(){
 </script>
 
 
+<!-- JavaScript for showing and hiding forms. --> 
+  <script type="text/javascript"> 
+    $(function() {  
+      $('#navbar .btn').click(function() {  
+        $('.hideable').hide();  
+        $('.div' + $(this).attr('target')).show();  
+      }); 
+    }); 
+  </script>

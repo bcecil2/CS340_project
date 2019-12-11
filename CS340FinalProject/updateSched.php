@@ -6,7 +6,6 @@ function debug_to_console($data) {
 
     echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
 }
-header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/update.php');
 	require_once "connectvars.php";
 	$newSched = "";
 	$id = 0;
@@ -14,11 +13,16 @@ header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/up
 		if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$input_name = trim($_POST["days"]);
 			$newSched = $input_name;
-			$input_id = (int)trim($_POST["schid"]);
+			$input_id = (int)(split("-", ($_POST["schsel"]))[1]);
 			$id = $input_id;
 
 			$sql = "UPDATE Schedule SET days = \"$newSched\" WHERE Schedule.sch_id = $id";
-			mysqli_query($link, $sql);
+			if(mysqli_query($link, $sql)){
+				header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/success.php');
+			} else {
+				header('Location: https://web.engr.oregonstate.edu/~cecilbl/CS340FinalProject/fail.php');
+				exit;
+			}
 		}
 	}
 ?>
